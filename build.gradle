@@ -51,12 +51,15 @@ android {
 dependencies {
     if (parent != null) {
         compile project(':card.io')
+
     } else {
         compile 'io.card:android-sdk:5.5.1'
     }
+    compile 'com.rmtheis:tess-two:5.4.1'
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
 
     androidTestCompile "com.android.support.test.espresso:espresso-core:3.0.2"
     androidTestCompile "com.github.lkorth:device-automator:01d85912ec"
+
 }

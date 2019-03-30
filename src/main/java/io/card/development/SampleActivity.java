@@ -5,10 +5,14 @@ package io.card.development;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -20,8 +24,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.card.payment.CardIOActivity;
 import io.card.payment.CardType;
@@ -29,6 +37,7 @@ import io.card.payment.CreditCard;
 import io.card.payment.i18n.StringKey;
 import io.card.payment.i18n.SupportedLocale;
 import io.card.payment.i18n.locales.LocalizedStringsList;
+import com.googlecode.tesseract.android.TessBaseAPI;
 
 public class SampleActivity extends Activity {
 
@@ -58,7 +67,7 @@ public class SampleActivity extends Activity {
     private CheckBox mShowPayPalActionBarIconToggle;
     private CheckBox mKeepApplicationThemeToggle;
     private Spinner mLanguageSpinner;
-    private EditText mUnblurEdit;
+   // private EditText mUnblurEdit;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +90,7 @@ public class SampleActivity extends Activity {
         mKeepApplicationThemeToggle = (CheckBox) findViewById(R.id.keep_application_theme);
 
         mLanguageSpinner = (Spinner) findViewById(R.id.language);
-        mUnblurEdit = (EditText) findViewById(R.id.unblur);
+        //mUnblurEdit = (EditText) findViewById(R.id.unblur);
 
         mResultLabel = (TextView) findViewById(R.id.result);
         mResultImage = (ImageView) findViewById(R.id.result_image);
@@ -122,10 +131,10 @@ public class SampleActivity extends Activity {
                 .putExtra(CardIOActivity.EXTRA_SUPPRESS_SCAN, mSuppressScanToggle.isChecked())
                 .putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE, true);
 
-        try {
-            int unblurDigits = Integer.parseInt(mUnblurEdit.getText().toString());
-            intent.putExtra(CardIOActivity.EXTRA_UNBLUR_DIGITS, unblurDigits);
-        } catch(NumberFormatException ignored) {}
+      //  try {
+        //    int unblurDigits = Integer.parseInt(mUnblurEdit.getText().toString());
+          //  intent.putExtra(CardIOActivity.EXTRA_UNBLUR_DIGITS, unblurDigits);
+        //} catch(NumberFormatException ignored) {}
 
         startActivityForResult(intent, REQUEST_SCAN);
     }
@@ -152,6 +161,8 @@ public class SampleActivity extends Activity {
 
         mResultLabel.setText("");
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -205,13 +216,68 @@ public class SampleActivity extends Activity {
         }
 
         Bitmap card = CardIOActivity.getCapturedCardImage(data);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        File f = saveFile(Objects.requireNonNull(getApplicationContext()).getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/" + "test.txt");
+        String r = extText1(card, Objects.requireNonNull(Objects.requireNonNull(getApplicationContext()).getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)).toString());
+        //Toast.makeText(getApplicationContext(), getAssets() + "", Toast.LENGTH_SHORT).show();
+        String r2 = extText2(card, Objects.requireNonNull(Objects.requireNonNull(getApplicationContext()).getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)).toString());
         mResultImage.setImageBitmap(card);
         mResultCardTypeImage.setImageBitmap(cardTypeImage);
+        outStr += r + "\n" + r2;
 
         Log.i(TAG, "Set result: " + outStr);
 
         mResultLabel.setText(outStr);
     }
+
+    //private final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "\\SampleApp\\src\\main\\assets";
+
+    private final String DATA_PATH = "file:///android_asset/tessdata";
+
+    private String extText1(Bitmap bitmap, String s){
+        //AssetManager am = getAssets();
+        //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+        TessBaseAPI tessBaseAPI = new TessBaseAPI();
+        tessBaseAPI.init(s, "eng");
+        tessBaseAPI.setImage(bitmap);
+        String result = tessBaseAPI.getUTF8Text();
+        tessBaseAPI.end();
+        return "eng:\n" + result;
+        //Toast.makeText(getApplicationContext(), result + "", Toast.LENGTH_LONG).show();
+    }
+
+    private String extText2(Bitmap bitmap, String s){
+        //AssetManager am = getAssets();
+        //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+        TessBaseAPI tessBaseAPI = new TessBaseAPI();
+        tessBaseAPI.init(s, "rus");
+        tessBaseAPI.setImage(bitmap);
+        String result = tessBaseAPI.getUTF8Text();
+        tessBaseAPI.end();
+        return "rus:\n" + result;
+        //Toast.makeText(getApplicationContext(), result + "", Toast.LENGTH_LONG).show();
+    }
+
+    public File saveFile (String filePath)
+    {
+        //Создание объекта файла.
+        File fileHandle = new File(filePath);
+        try
+        {
+            //Если нет директорий в пути, то они будут созданы:
+            if (!fileHandle.getParentFile().exists())
+                fileHandle.getParentFile().mkdirs();
+            //Если файл существует, то он будет перезаписан:
+            fileHandle.createNewFile();
+            return fileHandle;
+        }
+        catch (IOException e)
+        {
+
+        }
+        return fileHandle;
+    }
+
 
     private void setupLanguageList() {
         List<String> languages = new ArrayList<>();
