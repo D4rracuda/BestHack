@@ -19,13 +19,13 @@ repositories {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "io.card.development"
         minSdkVersion 18
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -58,16 +58,16 @@ android {
 
 dependencies {
     if (parent != null) {
-        compile project(':card.io')
+        implementation project(':card.io')
 
     } else {
-        compile 'io.card:android-sdk:5.5.1'
+        implementation 'io.card:android-sdk:5.5.1'
     }
-    compile 'com.rmtheis:tess-two:5.4.1'
+    implementation 'com.rmtheis:tess-two:5.4.1'
 
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.4'
 
-    androidTestCompile "com.android.support.test.espresso:espresso-core:3.0.2"
-    androidTestCompile "com.github.lkorth:device-automator:01d85912ec"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+    androidTestImplementation "com.github.lkorth:device-automator:01d85912ec"
 
 }
