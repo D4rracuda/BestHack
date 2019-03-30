@@ -11,47 +11,43 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+
+        <CheckBox
+            android:id="@+id/force_manual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="Force keyboard entry (bypass scan)"
+            android:visibility="invisible"
+            />
 
-            <Button
-                android:id="@+id/scan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.4"
-                android:onClick="onScan"
-                android:text="Scan Credit Card using Card.io" />
 
-        </LinearLayout>
+        <CheckBox
+            android:id="@+id/suppress_confirmation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Suppress confirmation"
+            android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/version"
+        <CheckBox
+            android:id="@+id/detect_only"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="8dp"/>
+            android:text="Detect card-ish rectangle only"
+            android:visibility="invisible"/>
 
-        <LinearLayout
+        <CheckBox
+            android:id="@+id/use_card_io_logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:orientation="horizontal">
+            android:text="Use card.io logo"
+            android:visibility="invisible"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Language:" />
-
-            <Spinner
-                android:id="@+id/language"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" />
-
-
-        </LinearLayout>
+        <CheckBox
+            android:id="@+id/show_paypal_action_bar_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PayPal icon in action bar"
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,6 +82,79 @@
 
         </LinearLayout>
 
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/scan"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="2"
+                android:onClick="onScan"
+                android:text="Scan new credit card" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/force_manual2"
+            android:layout_width="match_parent"
+            android:text="Force keyboard entry (bypass scan)"
+            android:visibility="invisible" />
+
+        <CheckBox
+            android:id="@+id/suppress_manual"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Suppress keyboard number entry"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/showLibrary"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="2"
+                android:text="Show library" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Language:" />
+
+            <Spinner
+                android:id="@+id/language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+
+        </LinearLayout>
+
+
         <CheckBox
             android:id="@+id/gather_cardholder_name"
             android:layout_width="match_parent"
@@ -106,49 +175,6 @@
             android:layout_height="wrap_content"
             android:text="Scan Expiry"
             android:checked="true"
-            android:visibility="invisible"/>
-
-        <CheckBox
-            android:id="@+id/force_manual"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Force keyboard entry (bypass scan)"
-            android:visibility="invisible"
-            />
-
-        <CheckBox
-            android:id="@+id/suppress_manual"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Suppress keyboard number entry"
-            android:visibility="invisible"/>
-
-        <CheckBox
-            android:id="@+id/suppress_confirmation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Suppress confirmation"
-            android:visibility="invisible"/>
-
-        <CheckBox
-            android:id="@+id/detect_only"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Detect card-ish rectangle only"
-            android:visibility="invisible"/>
-
-        <CheckBox
-            android:id="@+id/use_card_io_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Use card.io logo"
-            android:visibility="invisible"/>
-
-        <CheckBox
-            android:id="@+id/show_paypal_action_bar_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PayPal icon in action bar"
             android:visibility="invisible"/>
 
         <CheckBox
