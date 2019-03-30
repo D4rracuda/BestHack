@@ -81,7 +81,6 @@ public class SampleActivity extends Activity {
         mKeepApplicationThemeToggle = (CheckBox) findViewById(R.id.keep_application_theme);
 
         mLanguageSpinner = (Spinner) findViewById(R.id.language);
-        mUnblurEdit = (EditText) findViewById(R.id.unblur);
 
         mResultLabel = (TextView) findViewById(R.id.result);
         mResultImage = (ImageView) findViewById(R.id.result_image);
@@ -122,10 +121,7 @@ public class SampleActivity extends Activity {
                 .putExtra(CardIOActivity.EXTRA_SUPPRESS_SCAN, mSuppressScanToggle.isChecked())
                 .putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE, true);
 
-        try {
-            int unblurDigits = Integer.parseInt(mUnblurEdit.getText().toString());
-            intent.putExtra(CardIOActivity.EXTRA_UNBLUR_DIGITS, unblurDigits);
-        } catch(NumberFormatException ignored) {}
+
 
         startActivityForResult(intent, REQUEST_SCAN);
     }

@@ -4,7 +4,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
@@ -32,21 +32,29 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled true
-            proguardFile getDefaultProguardFile('proguard-android.txt')
-        }
-    }
-
-    android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                output.outputFile = new File(outputFile.parent, "card.io-sample-app-${variant.name}.apk")
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                def name = "myapp_v${variant.versionName}(${variant.versionCode}).apk"
+                output.outputFileName = name
             }
         }
     }
 }
+
+    android {
+        lintOptions {
+
+            checkReleaseBuilds false
+
+        }
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                outputFileName = new File(
+                        "release_build", // here you can change the name
+                        output.outputFile.name)
+            }
+        }
+    }
 
 dependencies {
     if (parent != null) {
