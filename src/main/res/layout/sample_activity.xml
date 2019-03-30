@@ -127,21 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
-<!--
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="50dp"
-                android:text="Digits not blurred:"/>
 
-            <EditText
-                android:id="@+id/unblur"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="4"
-                android:gravity="center"
-                android:inputType="number"/> -->
 
         </LinearLayout>
 
@@ -157,14 +143,6 @@
                 android:layout_weight="0.4"
                 android:text="Scan Credit Card using Card.io"
                 android:onClick="onScan"/>
-
-            <Button
-                android:id="@+id/auto_test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:onClick="onAutotest"
-                android:text="Auto-test loop"/>
 
         </LinearLayout>
 
