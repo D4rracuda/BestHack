@@ -41,20 +41,20 @@ android {
     }
 }
 
-    android {
-        lintOptions {
+android {
+    lintOptions {
 
-            checkReleaseBuilds false
+        checkReleaseBuilds false
 
-        }
-        applicationVariants.all { variant ->
-            variant.outputs.all { output ->
-                outputFileName = new File(
-                        "release_build", // here you can change the name
-                        output.outputFile.name)
-            }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = new File(
+                    "release_build", // here you can change the name
+                    output.outputFile.name)
         }
     }
+}
 
 dependencies {
     if (parent != null) {
@@ -63,8 +63,9 @@ dependencies {
     } else {
         compile 'io.card:android-sdk:5.5.1'
     }
-    compile 'com.rmtheis:tess-two:5.4.1'
+    implementation 'com.rmtheis:tess-two:5.4.1'
 
+    implementation 'com.android.support:support-annotations:25.4.0'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
 
     androidTestCompile "com.android.support.test.espresso:espresso-core:3.0.2"
