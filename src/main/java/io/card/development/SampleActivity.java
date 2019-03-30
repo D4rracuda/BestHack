@@ -279,7 +279,8 @@ public class SampleActivity extends Activity {
     private void setupLanguageList() {
         List<String> languages = new ArrayList<>();
         for (SupportedLocale<StringKey> locale : LocalizedStringsList.ALL_LOCALES) {
-            languages.add(locale.getName());
+            if (locale.getName().equals("en")||locale.getName().equals("ru"))
+                languages.add(locale.getName());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
