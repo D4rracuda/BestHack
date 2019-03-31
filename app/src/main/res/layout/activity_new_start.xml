@@ -13,14 +13,20 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="350dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="25dp"
+            android:layout_height="140dp"
+            android:background="@drawable/button_profile"
             android:text="Банковская карта" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="350dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/button_profile"
+            android:layout_height="140dp"
             android:text="Топливная карта" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
