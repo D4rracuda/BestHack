@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion Integer.parseInt(project.CompileSdkVersion)
-    buildToolsVersion project.BuildToolsVersion
 
     defaultConfig {
         applicationId "com.ocr"
@@ -21,8 +20,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/ocr-sdk.jar')
-    compile project(':identify')
-    compile 'com.yanzhenjie:permission:1.1.0' // 权限检查
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/ocr-sdk.jar')
+    implementation project(':identify')
+    implementation 'com.yanzhenjie:permission:1.1.0' // 权限检查
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'io.card:android-sdk:5.5.1'
 }

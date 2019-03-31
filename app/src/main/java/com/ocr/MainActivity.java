@@ -40,65 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         mContent = (TextView) findViewById(R.id.content);
 
-        // 正面(手动)
-        findViewById(R.id.id_card_front_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                        FileUtil.getSaveFile(getApplication()).getAbsolutePath());
-                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_CAMERA);
-            }
-        });
-
-        // 反面(手动)
-        findViewById(R.id.id_card_back_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                        FileUtil.getSaveFile(getApplication()).getAbsolutePath());
-                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
-                startActivityForResult(intent, REQUEST_CODE_CAMERA);
-            }
-        });
-
-        // 正面(自动)
-        findViewById(R.id.id_card_front_button_auto).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                        FileUtil.getSaveFile(getApplication()).getAbsolutePath());
-                intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE, true);
-                // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
-                // 请手动使用CameraNativeHelper初始化和释放模型
-                // 推荐这样做，可以避免一些activity切换导致的不必要的异常
-                intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL, true);
-                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_CAMERA);
-            }
-        });
-
-        // 反面(自动)
-        findViewById(R.id.id_card_back_button_auto).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                        FileUtil.getSaveFile(getApplication()).getAbsolutePath());
-                intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE, true);
-                // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
-                // 请手动使用CameraNativeHelper初始化和释放模型
-                // 推荐这样做，可以避免一些activity切换导致的不必要的异常
-                intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL, true);
-                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
-                startActivityForResult(intent, REQUEST_CODE_CAMERA);
-            }
-        });
-
-        // 银行卡
         findViewById(R.id.credit_card_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,33 +51,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 驾驶证
-        findViewById(R.id.driving_card_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                        FileUtil.getSaveFile(getApplication()).getAbsolutePath());
-                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
-                        CameraActivity.CONTENT_TYPE_GENERAL);
-                startActivityForResult(intent, REQUEST_CODE_DRIVING_LICENSE);
-            }
-        });
-
-        // 行驶证
-        findViewById(R.id.vehicle_card_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                        FileUtil.getSaveFile(getApplication()).getAbsolutePath());
-                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
-                        CameraActivity.CONTENT_TYPE_GENERAL);
-                startActivityForResult(intent, REQUEST_CODE_VEHICLE_LICENSE);
-            }
-        });
-
-        // 初始化
         initAccessTokenWithAkSk();
     }
 
@@ -153,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "初始化认证成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Начальная аутентификация прошла успешно", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -165,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "初始化认证失败,请检查 key", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Начальная аутентификация не удалась, пожалуйста, проверьте ключ", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -184,13 +98,13 @@ public class MainActivity extends AppCompatActivity {
                         final String msg;
                         switch (errorCode) {
                             case CameraView.NATIVE_SOLOAD_FAIL:
-                                msg = "加载so失败，请确保apk中存在ui部分的so";
+                                msg = "Загрузка не удалась, пожалуйста, убедитесь, что есть часть пользовательского интерфейса apk";
                                 break;
                             case CameraView.NATIVE_AUTH_FAIL:
-                                msg = "授权本地质量控制token获取失败";
+                                msg = "Не удалось получить авторизованный локальный маркер контроля качества";
                                 break;
                             case CameraView.NATIVE_INIT_FAIL:
-                                msg = "本地质量控制";
+                                msg = "Местный контроль качества";
                                 break;
                             default:
                                 msg = String.valueOf(errorCode);
@@ -199,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(MainActivity.this,
-                                        "本地质量控制初始化错误，错误原因： " + msg, Toast.LENGTH_SHORT).show();
+                                        "Ошибка инициализации локального контроля качества, причина ошибки： " + msg, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -235,20 +149,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 解析身份证图片
-     *
-     * @param idCardSide 身份证正反面
-     * @param filePath   图片路径
-     */
     private void recIDCard(String idCardSide, String filePath) {
         IDCardParams param = new IDCardParams();
         param.setImageFile(new File(filePath));
-        // 设置身份证正反面
         param.setIdCardSide(idCardSide);
-        // 设置方向检测
         param.setDetectDirection(true);
-        // 设置图像参数压缩质量0-100, 越大图像质量越好但是请求时间越长。 不设置则默认值为20
         param.setImageQuality(40);
         OCR.getInstance().recognizeIDCard(param, new OnResultListener<IDCardResult>() {
             @Override
@@ -275,17 +180,17 @@ public class MainActivity extends AppCompatActivity {
                     if (result.getAddress() != null) {
                         address = result.getAddress().toString();
                     }
-                    mContent.setText("姓名: " + name + "\n" +
-                            "性别: " + sex + "\n" +
-                            "民族: " + nation + "\n" +
-                            "身份证号码: " + num + "\n" +
-                            "住址: " + address + "\n");
+                    mContent.setText("Имя: " + name + "\n" +
+                            "Пол: " + sex + "\n" +
+                            "Страна: " + nation + "\n" +
+                            "Номер: " + num + "\n" +
+                            "Адресс: " + address + "\n");
                 }
             }
 
             @Override
             public void onError(OCRError error) {
-                Toast.makeText(MainActivity.this, "识别出错,请查看log错误代码", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Определите ошибки, пожалуйста, проверьте код ошибки журнала", Toast.LENGTH_SHORT).show();
                 Log.d("MainActivity", "onError: " + error.getMessage());
             }
         });
@@ -309,60 +214,48 @@ public class MainActivity extends AppCompatActivity {
 
                     String type;
                     if (result.getBankCardType() == BankCardResult.BankCardType.Credit) {
-                        type = "信用卡";
+                        type = "Кредитная карта";
                     } else if (result.getBankCardType() == BankCardResult.BankCardType.Debit) {
-                        type = "借记卡";
+                        type = "Дебетовая карта";
                     } else {
-                        type = "不能识别";
+                        type = "Не признается";
                     }
-                    mContent.setText("银行卡号: " + (!TextUtils.isEmpty(result.getBankCardNumber()) ? result.getBankCardNumber() : "") + "\n" +
-                            "银行名称: " + (!TextUtils.isEmpty(result.getBankName()) ? result.getBankName() : "") + "\n" +
-                            "银行类型: " + type + "\n");
+                    mContent.setText("Номер банковской карты: " + (!TextUtils.isEmpty(result.getBankCardNumber()) ? result.getBankCardNumber() : "") + "\n" +
+                            "Название банка: " + (!TextUtils.isEmpty(result.getBankName()) ? result.getBankName() : "") + "\n" +
+                            "Тип: " + type + "\n");
                 }
             }
 
             @Override
             public void onError(OCRError error) {
-                Toast.makeText(MainActivity.this, "识别出错,请查看log错误代码", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Определите ошибки, пожалуйста, проверьте код ошибки журнала", Toast.LENGTH_SHORT).show();
                 Log.d("MainActivity", "onError: " + error.getMessage());
             }
         });
     }
-
-    /**
-     * 解析驾驶证
-     *
-     * @param filePath 图片路径
-     */
     private void recDrivingCard(String filePath) {
-        // 驾驶证识别参数设置
         OcrRequestParams param = new OcrRequestParams();
 
-        // 设置image参数
+
         param.setImageFile(new File(filePath));
-        // 设置其他参数
+
         param.putParam("detect_direction", true);
-        // 调用驾驶证识别服务
+
         OCR.getInstance().recognizeDrivingLicense(param, new OnResultListener<OcrResponseResult>() {
             @Override
             public void onResult(OcrResponseResult result) {
-                // 调用成功，返回OcrResponseResult对象
+
                 Log.d("MainActivity", result.getJsonRes());
                 mContent.setText(result.getJsonRes());
             }
 
             @Override
             public void onError(OCRError error) {
-                // 调用失败，返回OCRError对象
+
             }
         });
     }
 
-    /**
-     * 解析行驶证
-     *
-     * @param filePath 图片路径
-     */
     private void recVehicleCard(String filePath) {
         OcrRequestParams param = new OcrRequestParams();
         param.setImageFile(new File(filePath));
@@ -375,7 +268,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(OCRError error) {
-                // 调用失败，返回OCRError对象
 
             }
         });
@@ -384,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         CameraNativeHelper.release();
-        // 释放内存资源
+
         OCR.getInstance().release();
         super.onDestroy();
 

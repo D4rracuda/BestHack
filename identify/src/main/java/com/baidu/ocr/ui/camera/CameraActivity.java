@@ -67,9 +67,6 @@ public class CameraActivity extends Activity {
     private PermissionCallback permissionCallback = new PermissionCallback() {
         @Override
         public boolean onRequestPermission() {
-            ActivityCompat.requestPermissions(CameraActivity.this,
-                    new String[]{Manifest.permission.CAMERA},
-                    PERMISSIONS_REQUEST_CAMERA);
             return false;
         }
     };
@@ -227,15 +224,7 @@ public class CameraActivity extends Activity {
         @Override
         public void onClick(View v) {
 
-            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    ActivityCompat.requestPermissions(CameraActivity.this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            PERMISSIONS_EXTERNAL_STORAGE);
-                    return;
-                }
-            }
+
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);

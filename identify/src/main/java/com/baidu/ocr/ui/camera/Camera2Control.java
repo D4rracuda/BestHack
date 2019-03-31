@@ -221,11 +221,7 @@ public class Camera2Control implements ICameraControl {
 
     private void openCamera(int width, int height) {
         // 6.0+的系统需要检查系统权限 。
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestCameraPermission();
-            return;
-        }
+
         setUpCameraOutputs(width, height);
         configureTransform(width, height);
         CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);

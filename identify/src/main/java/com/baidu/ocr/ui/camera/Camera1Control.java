@@ -375,13 +375,7 @@ public class Camera1Control implements ICameraControl {
 
     // 开启预览
     private void startPreview(boolean checkPermission) {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (checkPermission && permissionCallback != null) {
-                permissionCallback.onRequestPermission();
-            }
-            return;
-        }
+
         if (camera == null) {
             initCamera();
         } else {
