@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="editNickname" type="id">String</item>
-    <item name="editPin" type="id">String</item>
-</resources>

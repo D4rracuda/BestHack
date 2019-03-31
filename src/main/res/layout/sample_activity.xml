@@ -163,28 +163,38 @@
         <CheckBox
             android:id="@+id/gather_cardholder_name"
             android:text="Cardholder Name"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:layout_height="0dp"
+            android:layout_width="0dp" />
 
         <CheckBox
             android:id="@+id/postal_code_numeric_only"
             android:text="Restrict Postal Code to Numeric Only"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:layout_height="0dp"
+            android:layout_width="0dp" />
 
         <CheckBox
             android:id="@+id/suppress_confirmation"
             android:text="Suppress confirmation"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:layout_height="0dp"
+            android:layout_width="0dp" />
 
         <CheckBox
             android:id="@+id/scan_expiry"
             android:text="Scan Expiry"
             android:checked="true"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:layout_height="0dp"
+            android:layout_width="0dp"/>
 
         <CheckBox
             android:id="@+id/keep_application_theme"
             android:text="Keep application theme"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:layout_height="0dp"
+            android:layout_width="0dp"/>
 
        <!-- <LinearLayout
             android:layout_width="match_parent"
