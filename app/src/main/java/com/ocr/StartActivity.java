@@ -2,9 +2,12 @@ package com.ocr;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -81,6 +84,21 @@ public class StartActivity extends AppCompatActivity {
                 if (scanResult.postalCode != null) {
                     resultDisplayStr += "Postal Code: " + scanResult.postalCode + "\n";
                 }
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(StartActivity.this);
+                String s = preferences.getString("allCardsIs", null);
+                int sInt = Integer.parseInt(s);
+                SharedPreferences.Editor editor = preferences.edit();
+
+                editor.putString("NumberOfCard" + s, "Номер банковской карты: " +
+                        scanResult.cardNumber);
+                editor.putString("TypeOfCard" + s, "Тип: " +
+                        scanResult.getCardType());
+                editor.putString("NameOfBanck" + s, "Название банка: " + scanResult.cardholderName);
+                editor.putString("Expire" + s, "Дата: " + scanResult.expiryMonth + "/" + scanResult.expiryYear);
+                editor.putString("Credit" + s, "Тип: бизнес карта");
+                editor.putString("allCardsIs", Integer.toString(sInt + 1));
+                editor.apply();
             }
             else {
                 resultDisplayStr = "Scan was canceled.";

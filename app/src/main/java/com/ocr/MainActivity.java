@@ -2,10 +2,13 @@ package com.ocr;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResult(AccessToken result) {
 
-                        // 本地自动识别需要初始化
+
                         initLicense();
 
                         Log.d("MainActivity", "onResult: " + result.toString());
@@ -84,9 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 }, getApplicationContext(),
-                // 需要自己配置 https://console.bce.baidu.com
                 "oH6tqEsBX2PSW2OViQyd2yYA",
-                // 需要自己配置 https://console.bce.baidu.com
                 "A36f7UrseglvtH9jGP5u7bU9uGxIjZ31");
     }
 
@@ -185,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                             "Страна: " + nation + "\n" +
                             "Номер: " + num + "\n" +
                             "Адресс: " + address + "\n");
+
                 }
             }
 
@@ -196,17 +198,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * 解析银行卡
-     *
-     * @param filePath 图片路径
-     */
     private void recCreditCard(String filePath) {
-        // 银行卡识别参数设置
         BankCardParams param = new BankCardParams();
         param.setImageFile(new File(filePath));
 
-        // 调用银行卡识别服务
         OCR.getInstance().recognizeBankCard(param, new OnResultListener<BankCardResult>() {
             @Override
             public void onResult(BankCardResult result) {
@@ -220,9 +215,29 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         type = "Не признается";
                     }
-                    mContent.setText("Номер банковской карты: " + (!TextUtils.isEmpty(result.getBankCardNumber()) ? result.getBankCardNumber() : "") + "\n" +
-                            "Название банка: " + (!TextUtils.isEmpty(result.getBankName()) ? result.getBankName() : "") + "\n" +
-                            "Тип: " + type + "\n");
+                    mContent.setText("Номер банковской карты: " +
+                            (!TextUtils.isEmpty(result.getBankCardNumber()) ? result.getBankCardNumber() : "") + "\n" +
+                            "Название банка: " +
+                            (!TextUtils.isEmpty(result.getBankName()) ? result.getBankName() : "") + "\n" +
+                            "Тип: " +
+                            type + "\n");
+
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                    String s = preferences.getString("allCardsIs", null);
+                    int sInt = Integer.parseInt(s);
+                    SharedPreferences.Editor editor = preferences.edit();
+
+                    editor.putString("NumberOfCard" + s, "Номер банковской карты: " +
+                            (!TextUtils.isEmpty(result.getBankCardNumber()) ? result.getBankCardNumber() : ""));
+                    editor.putString("TypeOfCard" + s, "Тип: " +
+                            type);
+                    editor.putString("NameOfBanck" + s, "Название банка: " +
+                            (!TextUtils.isEmpty(result.getBankName()) ? result.getBankName() : ""));
+                    editor.putString("Expire" + s, "Дата: не найдена");
+                    editor.putString("Credit" + s, "Тип: топливная карта");
+                    editor.putString("allCardsIs", Integer.toString(sInt + 1));
+                    editor.apply();
+
                 }
             }
 

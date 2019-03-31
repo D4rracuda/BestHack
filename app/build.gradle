@@ -23,7 +23,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/ocr-sdk.jar')
     implementation project(':identify')
-    implementation 'com.yanzhenjie:permission:1.1.0' // 权限检查
+    implementation 'com.yanzhenjie:permission:1.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'io.card:android-sdk:5.5.1'
+    implementation 'com.android.support:recyclerview-v7:25.0.0'
 }
