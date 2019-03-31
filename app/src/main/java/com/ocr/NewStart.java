@@ -30,5 +30,22 @@ public class NewStart extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button buttonSett = (Button) findViewById(R.id.buttonSett);
+        buttonSett.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewStart.this, Settings.class);
+                startActivity(intent);
+            }
+        });
+
+        Button buttonLib = (Button) findViewById(R.id.buttonLib);
+        buttonLib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 }

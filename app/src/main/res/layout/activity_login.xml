@@ -4,35 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewStart">
+    tools:context=".Login">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button"
+        <EditText
+            android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Банковская карта" />
+            android:ems="10"
+            android:hint="Код"
+            android:inputType="numberPassword" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Топливная карта" />
-
-        <Button
-            android:id="@+id/buttonLib"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Библиотека" />
-
-        <Button
-            android:id="@+id/buttonSett"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Настройки" />
+            android:text="Войти" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
