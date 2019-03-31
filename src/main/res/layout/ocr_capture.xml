@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OcrCaptureActivity">
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/tvTextoCapturado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:elevation="0dp"
+        android:orientation="horizontal"
+        android:weightSum="30">
+
+        <Button
+            android:id="@+id/flash"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@+id/captureImage"
+            android:layout_alignBottom="@+id/captureImage"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_toLeftOf="@+id/captureImage"
+            android:layout_toStartOf="@+id/captureImage"
+            android:layout_weight="4"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/captureImage"
+            android:layout_width="35dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_weight="10"
+            android:background="@android:drawable/ic_menu_camera"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnCapturarFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_weight="20"
+            android:elevation="0dp"
+            android:text="Tomar fotografia" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"/>
+
+        <Button
+            android:id="@+id/flipCamera"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_toRightOf="@id/captureImage"
+            android:layout_weight="4"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+</RelativeLayout>

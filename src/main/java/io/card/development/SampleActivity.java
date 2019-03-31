@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -96,12 +97,34 @@ public class SampleActivity extends Activity {
         mResultImage = (ImageView) findViewById(R.id.result_image);
         mResultCardTypeImage = (ImageView) findViewById(R.id.result_card_type_image);
 
+        // кнопка скана кредитки
+        Button scann = findViewById(R.id.scan1);
+        scann.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onScan(v);
+            }
+        });
+
+        Button scan2 = findViewById(R.id.scan2);
+        scan2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                oilCard();
+            }
+        });
+
         TextView version = (TextView) findViewById(R.id.version);
         version.setText("card.io library: " + CardIOActivity.sdkVersion() + "\n" +
                 "Build date: " + CardIOActivity.sdkBuildDate());
 
         setScanExpiryEnabled();
         setupLanguageList();
+    }
+
+    private void oilCard(){
+        Intent intent = new Intent(SampleActivity.this, OcrCaptureActivity.class);
+        startActivity(intent);
     }
 
     private void setScanExpiryEnabled() {
@@ -215,12 +238,12 @@ public class SampleActivity extends Activity {
         Bitmap card = CardIOActivity.getCapturedCardImage(data);
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         File f = saveFile(Objects.requireNonNull(getApplicationContext()).getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/" + "test.txt");
-        String r = extText1(card, Objects.requireNonNull(Objects.requireNonNull(getApplicationContext()).getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)).toString());
+        //String r = extText1(card, Objects.requireNonNull(Objects.requireNonNull(getApplicationContext()).getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)).toString());
         //Toast.makeText(getApplicationContext(), getAssets() + "", Toast.LENGTH_SHORT).show();
-        String r2 = extText2(card, Objects.requireNonNull(Objects.requireNonNull(getApplicationContext()).getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)).toString());
+        //String r2 = extText2(card, Objects.requireNonNull(Objects.requireNonNull(getApplicationContext()).getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)).toString());
         mResultImage.setImageBitmap(card);
         mResultCardTypeImage.setImageBitmap(cardTypeImage);
-        outStr += r + "\n" + r2;
+        //outStr += r + "\n" + r2;
 
         Log.i(TAG, "Set result: " + outStr);
 
@@ -229,7 +252,7 @@ public class SampleActivity extends Activity {
 
     //private final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "\\SampleApp\\src\\main\\assets";
 
-    private final String DATA_PATH = "file:///android_asset/tessdata";
+    private final String DATA_PATH = "fButtoile:///android_asset/tessdata";
 
     private String extText1(Bitmap bitmap, String s){
         //AssetManager am = getAssets();

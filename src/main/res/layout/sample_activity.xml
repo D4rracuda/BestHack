@@ -84,12 +84,19 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/scan"
+                android:id="@+id/scan1"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:layout_weight="2"
-                android:onClick="onScan"
-                android:text="Scan new credit card" />
+                android:text="Scan credit card" />
+
+            <Button
+                android:id="@+id/scan2"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="2"
+                android:text="Scan oil card" />
+
 
         </LinearLayout>
 
