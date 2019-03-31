@@ -12,4 +12,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <item name="pin" type="id">String</item>
 </resources>

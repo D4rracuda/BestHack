@@ -66,6 +66,8 @@ dependencies {
     implementation 'com.rmtheis:tess-two:5.4.1'
 
     implementation 'com.android.support:support-annotations:25.4.0'
+    implementation 'com.android.support:appcompat-v7:25.4.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
 
     androidTestCompile "com.android.support.test.espresso:espresso-core:3.0.2"
